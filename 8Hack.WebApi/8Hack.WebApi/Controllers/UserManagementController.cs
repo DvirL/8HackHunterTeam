@@ -10,7 +10,7 @@ namespace _8Hack.WebApi.Controllers
     {
         [Route("Register")]
         [HttpPost]
-        public bool Register(string username, string password)
+        public AccountData Register(string username, string password)
         {
             // Save user logic
             throw new NotImplementedException();
