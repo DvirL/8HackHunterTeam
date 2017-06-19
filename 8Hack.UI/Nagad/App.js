@@ -4,12 +4,10 @@ import {
   StackNavigator,
 } from 'react-navigation';
 
-import HomeScreen from './components/HomeScreen'
-import ProfileScreen from './components/Profile'
-
+import HomeScreen from './components/'
 const App = StackNavigator({
-      Home: { screen: HomeScreen },
-      Profile: { screen: ProfileScreen },
+  Home: { screen: HomeScreen },
+  Profile: { screen: ProfileScreen },
 });
 
 export default App;
