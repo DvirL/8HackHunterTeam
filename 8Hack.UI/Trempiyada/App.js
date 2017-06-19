@@ -5,11 +5,13 @@ import {
 } from 'react-navigation';
 
 import HomeScreen from './components/HomeScreen'
-import ProfileScreen from './components/Profile'
+import WaitingScreen from './containers/WaitingScreen'
+import SearchScreen from './containers/SearchScreen'
 
 const App = StackNavigator({
       Home: { screen: HomeScreen },
-      Profile: { screen: ProfileScreen },
+      WaitingScreen: { screen: WaitingScreen },
+      SearchScreen: {screen: SearchScreen}
 });
 
 export default App;
