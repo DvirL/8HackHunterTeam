@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Button } from 'react-native';
 import PopularDestinationContainer from "../containers/PopularDestinationContainer";
 
 export default class HomeScreen extends Component {

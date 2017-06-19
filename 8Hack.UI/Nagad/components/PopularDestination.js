@@ -10,7 +10,8 @@ export default class PopularDestination extends Component {
         const {destinationName, nav} = this.props;
         return (
             <View style={styles.item}>
-                <Button style={styles.buttons} onPress={()=>this.navigateToDestinationQueue(nav,destinationName)} title={ destinationName } />
+                <Button style={styles.buttons} onPress={()=>this.navigateToDestinationQueue(nav,destinationName)}
+                        title={ destinationName } />
             </View>
         );
     }

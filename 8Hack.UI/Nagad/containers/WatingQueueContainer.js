@@ -13,10 +13,20 @@ export default class WatingQueueContainer extends Component {
     }
 
     getWaitingQueue(destinationName){
+        console.log('fetching queue');
         return [
             {name:'Dvir'},
             {name:'Nadav'}
         ];
+    }
+
+    deleteFromQueue = (userName, reason)=>{
+        console.log('removing ' + userName + ' because : ' + reason);
+        var newQueue = this.state.queue;
+        newQueue = newQueue.filter((x)=>{
+            return x.name != userName;
+        });
+        this.setState({queue: newQueue});
     }
 
     render() {
@@ -24,7 +34,7 @@ export default class WatingQueueContainer extends Component {
             <View>
                 <FlatList
                     data={this.state.queue}
-                    renderItem={({item}) => <WaitingQueueItem name={item.name}/>}
+                    renderItem={({item}) => <WaitingQueueItem name={item.name} deleteFromQueue={this.deleteFromQueue}/>}
             />
             </View>
         );
