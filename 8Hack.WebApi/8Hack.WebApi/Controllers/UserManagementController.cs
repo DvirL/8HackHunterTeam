@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Web.Http;
 using System.Web.Http.Results;
 using _8Hack.WebApi.DAL.Interfaces;
@@ -30,6 +31,14 @@ namespace _8Hack.WebApi.Controllers
             {
                 UserDetails = newUserDetails,
                 SavedDestinations = new SavedDestinations()
+                {
+                    Home = new DestinationGroup()
+                    {
+                        Name = "Home",
+                        Destinations = new List<Destination>()
+                    },
+                    Favourites = new List<DestinationGroup>()
+                }
             };
             _accountsStorage.AddAccount(newAccount);
             return newAccount;

@@ -54,7 +54,7 @@ namespace _8Hack.WebApi.Controllers
         }
 
         [HttpDelete]
-        [Route("Queue")]
+        [Route("Unsubscribe")]
         public bool DeleteFromQueue([FromUri] string userId, [FromUri] string destinationId)
         {
             // Remove UserDetails from DestinationQueue
@@ -65,7 +65,7 @@ namespace _8Hack.WebApi.Controllers
         }
 
         [HttpDelete]
-        [Route("Queue")]
+        [Route("UnsubscribeAll")]
         public bool DeleteUserFromAllQueues([FromUri] string userId)
         {
             // Remove UserDetails from all DestinationQueues

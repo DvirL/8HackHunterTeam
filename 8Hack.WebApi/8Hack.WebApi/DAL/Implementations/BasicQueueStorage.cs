@@ -18,9 +18,11 @@ namespace _8Hack.WebApi.DAL.Implementations
             _queues = new List<DestinationQueue>();
         }
 
+
+
         public DestinationQueue GetQueue(Destination destination)
         {
-            var requestedQueue = _queues.FirstOrDefault(q => q.Destination.Id == destination.Id);
+            var requestedQueue = GetOrCreateAndAddDestinationQueue(destination);
             return requestedQueue;
         }
 
@@ -31,24 +33,31 @@ namespace _8Hack.WebApi.DAL.Implementations
 
         public bool Subscribe(UserDetails userDetails, Destination destination)
         {
-            var queueToRegister = _queues.FirstOrDefault(q => q.Destination.Id == destination.Id);
-            if (queueToRegister == null)
-            {
-                return false;
-            }
+            var queueToRegister = GetOrCreateAndAddDestinationQueue(destination);
             queueToRegister.Subscribers.Add(userDetails);
             return true;
         }
 
         public bool Unsubscribe(UserDetails userDetails, Destination destination)
         {
-            var queueToRemoveFrom = _queues.FirstOrDefault(q => q.Destination.Id == destination.Id);
-            if (queueToRemoveFrom == null)
-            {
-                return false;
-            }
+            var queueToRemoveFrom = GetOrCreateAndAddDestinationQueue(destination);
             var removeSuccessful = queueToRemoveFrom.Subscribers.Remove(userDetails);
             return removeSuccessful;
+        }
+
+
+
+
+        private DestinationQueue GetOrCreateAndAddDestinationQueue(Destination destination)
+        {
+            var requestedQueue = _queues.FirstOrDefault(q => q.Destination.Id == destination.Id);
+            if (requestedQueue == null)
+            {
+                var newQueue = new DestinationQueue(destination);
+                _queues.Add(newQueue);
+                requestedQueue = newQueue;
+            }
+            return requestedQueue;
         }
     }
 }
