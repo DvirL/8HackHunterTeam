@@ -15,8 +15,11 @@ export default class WatingQueueContainer extends Component {
     getWaitingQueue(destinationName){
         console.log('fetching queue');
         return [
-            {name:'Dvir'},
-            {name:'Nadav'}
+            {key:'Eden', name:'עדן'},
+            {key:'Dvir', name:'דביר'},
+            {key:'Nadav', name:'נדב'},
+            {key:'Ben', name:'בן'},
+            {key:'Tomer', name:'תומר'}
         ];
     }
 

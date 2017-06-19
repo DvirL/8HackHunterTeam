@@ -3,11 +3,11 @@ import PopularDestinationContainer from "../containers/PopularDestinationContain
 
 export default class HomeScreen extends Component {
     static navigationOptions = ({ navigation }) => ({
-        title: 'Welcom Nagad'
+        title: 'אהלן יא נגד!'
     });
 
     render() {
-        const { navigate } = this.props.navigation;
+            const { navigate } = this.props.navigation;
         return (
             <PopularDestinationContainer nav={navigate}/>
         );

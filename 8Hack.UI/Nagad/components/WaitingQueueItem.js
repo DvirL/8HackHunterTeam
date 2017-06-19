@@ -5,16 +5,19 @@ import Swipeout from 'react-native-swipeout';
 export default class WaitingQueueItem extends Component {
     constructor(props) {
         super(props);
+
+        this.state = {active: true}
     }
+
     render() {
         var swipeOptions = [
             {
-                text:'Got on',
+                text:'עלה',
                 backgroundColor:'#3cbc76',
                 onPress : () => {this.props.deleteFromQueue(this.props.name, 'Got On')}
             },
             {
-                text:'No show',
+                text:'לא בא',
                 backgroundColor:'#d31f0e',
                 onPress : () => {this.props.deleteFromQueue(this.props.name, 'No Show')}
             }];
@@ -22,7 +25,7 @@ export default class WaitingQueueItem extends Component {
         const {name} = this.props;
         return (
             <View style={styles.viewContainer}>
-                <Swipeout style={styles.container} right={swipeOptions}>
+                <Swipeout style={styles.container} right={swipeOptions} close={this.state.active}>
                     <View>
                         <Text style={styles.buttons}>{name}</Text>
                     </View>
