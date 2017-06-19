@@ -9,7 +9,7 @@ namespace _8Hack.WebApi.Controllers
     public class UserManagementController : ApiController
     {
         [Route("Register")]
-        [HttpGet]
+        [HttpPost]
         public bool Register(string username, string password)
         {
             // Save user logic

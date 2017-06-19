@@ -19,21 +19,21 @@ namespace _8Hack.WebApi.Controllers
         }
 
         [HttpGet]
-        public DestinationQueue GetDestinationsQueue([FromUri] string queueId)
+        public DestinationQueue GetDestinationsQueue([FromUri] string destinationId)
         {
-            // Get destination queue according to queueId
+            // Get destination queue according to destinationId
             throw new NotImplementedException();
         }
 
         [HttpPost]
-        public IHttpActionResult RegisterToQueue(string userId, string queueId)
+        public IHttpActionResult RegisterToQueue(string userId, string destinationId)
         {
-            // Get UserDetails using queueId, and register UserDetails to the destinationQueue using the queueId
+            // Get UserDetails using destinationId, and register UserDetails to the destinationQueue using the destinationId
             throw new NotImplementedException();
         }
 
         [HttpDelete]
-        public IHttpActionResult DeleteFromQueue([FromUri] string userId, [FromUri] string queueId)
+        public IHttpActionResult DeleteFromQueue([FromUri] string userId, [FromUri] string destinationId)
         {
             // Remove UserDetails from DestinationQueue
             throw new NotImplementedException();
