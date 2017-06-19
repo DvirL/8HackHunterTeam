@@ -1,6 +1,6 @@
 using System;
 
-namespace _8Hack.WebApi.Models
+namespace _8Hack.WebApi.Models.Common
 {
     public class Destination
     {

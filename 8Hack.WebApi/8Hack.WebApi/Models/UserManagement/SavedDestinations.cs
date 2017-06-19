@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace _8Hack.WebApi.Models
+namespace _8Hack.WebApi.Models.UserManagement
 {
     public class SavedDestinations
     {
