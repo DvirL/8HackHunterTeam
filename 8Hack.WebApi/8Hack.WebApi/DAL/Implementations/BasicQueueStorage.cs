@@ -13,6 +13,11 @@ namespace _8Hack.WebApi.DAL.Implementations
     {
         private IList<DestinationQueue> _queues;
 
+        public BasicQueueStorage()
+        {
+            _queues = new List<DestinationQueue>();
+        }
+
         public DestinationQueue GetQueue(Destination destination)
         {
             var requestedQueue = _queues.FirstOrDefault(q => q.Destination.Id == destination.Id);

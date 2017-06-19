@@ -33,7 +33,8 @@ namespace _8Hack.WebApi.Controllers
         }
 
         [HttpGet]
-        public DestinationQueue GetDestinationsQueue([FromUri] string destinationId)
+        [Route("Queue")]
+        public DestinationQueue GetDestinationsQueue(string destinationId)
         {
             // Get destination queue according to destinationId
             var requestedDestination = _destinationsStorage.GetDestination(destinationId);
@@ -42,6 +43,7 @@ namespace _8Hack.WebApi.Controllers
         }
 
         [HttpPost]
+        [Route("Queue")]
         public bool RegisterToQueue(string userId, string destinationId)
         {
             // Get UserDetails using destinationId, and register UserDetails to the destinationQueue using the destinationId
@@ -52,6 +54,7 @@ namespace _8Hack.WebApi.Controllers
         }
 
         [HttpDelete]
+        [Route("Queue")]
         public bool DeleteFromQueue([FromUri] string userId, [FromUri] string destinationId)
         {
             // Remove UserDetails from DestinationQueue
@@ -62,6 +65,7 @@ namespace _8Hack.WebApi.Controllers
         }
 
         [HttpDelete]
+        [Route("Queue")]
         public bool DeleteUserFromAllQueues([FromUri] string userId)
         {
             // Remove UserDetails from all DestinationQueues

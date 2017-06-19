@@ -17,8 +17,8 @@ namespace _8Hack.WebApi.Controllers
             _accountsStorage = accountsStorage;
         }
 
-        [Route("Register")]
         [HttpPost]
+        [Route("Register")]
         public AccountData Register(string username, string password, string name)
         {
             var newUserDetails = new UserDetails()
@@ -36,6 +36,7 @@ namespace _8Hack.WebApi.Controllers
         }
 
         [HttpGet]
+        [Route("User")]
         public AccountData GetAccountData([FromUri] string userId)
         {
             var savedDestinations = _accountsStorage.GetAccount(userId);

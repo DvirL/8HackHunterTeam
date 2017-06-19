@@ -30,5 +30,4 @@ namespace _8Hack.WebApi.DAL.Implementations
             return requestedDestination;
         }
     }
-    }
 }
