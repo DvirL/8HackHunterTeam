@@ -5,6 +5,7 @@ using System.Web;
 using _8Hack.WebApi.DAL.Interfaces;
 using _8Hack.WebApi.Models.Common;
 using _8Hack.WebApi.Models.QueueManagement;
+using _8Hack.WebApi.Models.UserManagement;
 
 namespace _8Hack.WebApi.DAL.Implementations
 {

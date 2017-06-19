@@ -28,7 +28,7 @@ namespace _8Hack.WebApi.DAL.Implementations
             get { return new List<AccountData>(_accounts); }
         }
 
-        public bool UpdateAccount(string userId, AccountData newAccount)
+        public bool UpdateSavedDestinations(string userId, SavedDestinations savedDestinations)
         {
             var account = _accounts.FirstOrDefault(ac => ac.UserDetails.Id == userId);
             if (account == null)
@@ -36,8 +36,7 @@ namespace _8Hack.WebApi.DAL.Implementations
                 return false;
             }
 
-            account.UserDetails.Name = newAccount.UserDetails.Name;
-            account.SavedDestinations = newAccount.SavedDestinations;
+            account.SavedDestinations = savedDestinations;
             return true;
         }
 

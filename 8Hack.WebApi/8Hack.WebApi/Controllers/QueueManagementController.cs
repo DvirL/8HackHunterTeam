@@ -1,49 +1,85 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Web.Http;
+using _8Hack.WebApi.DAL.Interfaces;
 using _8Hack.WebApi.Models.Common;
 using _8Hack.WebApi.Models.QueueManagement;
 
 namespace _8Hack.WebApi.Controllers
 {
     [RoutePrefix("api/queues")]
-    public class QueueManagementController : ApiController
+    public class QueueManagementController : ApiController, IQueueManagementController
     {
+        private IQueueStorage _queueStorage;
+        private IDestinationsStorage _destinationsStorage;
+        private IAccountStorage _accountStorage;
+
+        public QueueManagementController(IQueueStorage queueStorage, IDestinationsStorage destinationsStorage, IAccountStorage accountStorage)
+        {
+            _queueStorage = queueStorage;
+            _destinationsStorage = destinationsStorage;
+            _accountStorage = accountStorage;
+        }
+
         [HttpGet]
         [Route("All")]
         public IEnumerable<Destination> GetAllDestinations()
         {
             // Return all destinations
-            throw new NotImplementedException();
+            var destinations = _destinationsStorage.Destinations;
+            return destinations;
         }
 
         [HttpGet]
         public DestinationQueue GetDestinationsQueue([FromUri] string destinationId)
         {
             // Get destination queue according to destinationId
-            throw new NotImplementedException();
+            var requestedDestination = _destinationsStorage.GetDestination(destinationId);
+            var requestedQueue = _queueStorage.GetQueue(requestedDestination);
+            return requestedQueue;
         }
 
         [HttpPost]
-        public IHttpActionResult RegisterToQueue(string userId, string destinationId)
+        public bool RegisterToQueue(string userId, string destinationId)
         {
             // Get UserDetails using destinationId, and register UserDetails to the destinationQueue using the destinationId
-            throw new NotImplementedException();
+            var userToSubscribe = _accountStorage.GetAccount(userId);
+            var destinationToSubscribeTo = _destinationsStorage.GetDestination(destinationId);
+            var successfulyRegisteredToQueue = _queueStorage.Subscribe(userToSubscribe.UserDetails, destinationToSubscribeTo);
+            return successfulyRegisteredToQueue;
         }
 
         [HttpDelete]
-        public IHttpActionResult DeleteFromQueue([FromUri] string userId, [FromUri] string destinationId)
+        public bool DeleteFromQueue([FromUri] string userId, [FromUri] string destinationId)
         {
             // Remove UserDetails from DestinationQueue
-            throw new NotImplementedException();
+            var userToUnsubscribe = _accountStorage.GetAccount(userId);
+            var destinationToUnsubscribeFrom = _destinationsStorage.GetDestination(destinationId);
+            var successfulyUnsubscribedFromQueue = _queueStorage.Unsubscribe(userToUnsubscribe.UserDetails, destinationToUnsubscribeFrom);
+            return successfulyUnsubscribedFromQueue;
         }
 
         [HttpDelete]
-        public IHttpActionResult DeleteUserFromAllQueues([FromUri] string userId)
+        public bool DeleteUserFromAllQueues([FromUri] string userId)
         {
             // Remove UserDetails from all DestinationQueues
-            throw new NotImplementedException();
+            var userToUnsubscribe = _accountStorage.GetAccount(userId);
+            var destinationsToUnsubscribeFrom =
+                _queueStorage
+                    .Queues
+                    .Where(q => q.Subscribers.Select(s => s.Id == userId).Any())
+                    .Select(q => q.Destination);
+
+            var allUnsubscriptionsSuccessful = true;
+            foreach (var destination in destinationsToUnsubscribeFrom)
+            {
+                var unsubscriptionSuccessful = _queueStorage.Unsubscribe(userToUnsubscribe.UserDetails, destination);
+                if (unsubscriptionSuccessful == false)
+                    allUnsubscriptionsSuccessful = false;
+            }
+            return allUnsubscriptionsSuccessful;
         }
     }
 }

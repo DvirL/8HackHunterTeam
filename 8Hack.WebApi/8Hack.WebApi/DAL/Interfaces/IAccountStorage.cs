@@ -7,7 +7,7 @@ namespace _8Hack.WebApi.DAL.Interfaces
     {
         AccountData GetAccount(string userId);
         IEnumerable<AccountData> AllAccounts { get; }
-        bool UpdateAccount(string userId, AccountData newAccount);
+        bool UpdateSavedDestinations(string userId, SavedDestinations savedDestinations);
         bool AddAccount(AccountData newAccount);
     }
 }

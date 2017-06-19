@@ -23,6 +23,12 @@ namespace _8Hack.WebApi.DAL.Implementations
         public IEnumerable<Destination> Destinations {
             get { return _destinations; }
         }
+
+        public Destination GetDestination(string destintionId)
+        {
+            var requestedDestination = _destinations.FirstOrDefault(des => des.Id == destintionId);
+            return requestedDestination;
+        }
     }
     }
 }
