@@ -5,10 +5,10 @@ using _8Hack.WebApi.Models.UserManagement;
 
 namespace _8Hack.WebApi.Controllers
 {
-    [RoutePrefix("/api/users")]
+    [RoutePrefix("api/users")]
     public class UserManagementController : ApiController
     {
-        [Route("register")]
+        [Route("Register")]
         [HttpGet]
         public bool Register(string username, string password)
         {
@@ -17,7 +17,7 @@ namespace _8Hack.WebApi.Controllers
         }
 
         [HttpGet]
-        [Route("/SavedDestinations")]
+        [Route("SavedDestinations")]
         public SavedDestinations GetSavedDestinations([FromUri] string userId)
         {
             // Get saved destinations according to user by guid
@@ -25,7 +25,7 @@ namespace _8Hack.WebApi.Controllers
         }
 
         [HttpPost]
-        [Route("/SavedDestinations")]
+        [Route("SavedDestinations")]
         public bool UpdateSavedDestinations(string userId, SavedDestinations savedDestinations)
         {
             // Overwrite the saved destinatinos

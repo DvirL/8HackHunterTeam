@@ -7,11 +7,11 @@ using _8Hack.WebApi.Models.QueueManagement;
 
 namespace _8Hack.WebApi.Controllers
 {
-    [RoutePrefix("/api/queues")]
+    [RoutePrefix("api/queues")]
     public class QueueManagementController : ApiController
     {
         [HttpGet]
-        [Route("/all")]
+        [Route("All")]
         public IEnumerable<Destination> GetAllDestinations()
         {
             // Return all destinations
