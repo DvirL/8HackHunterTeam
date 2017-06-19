@@ -1,19 +1,17 @@
 import React,{Component} from 'react';
-import {Button} from 'react-native';
+import {View, Text} from 'react-native';
+import FavoritesDestinationsContainer from '../containers/FavoritesDestinationsContainer'
 
 class HomeScreen extends Component {
   static navigationOptions = {
-    title: 'Welcome',
+    title: 'היי נדב',
   };
   render() {
-    const { navigate } = this.props.navigation;
+      const {navigation} = this.props;
     return (
-      <Button
-        title="Go to Jane's profile"
-        onPress={() =>
-          navigate('Profile', { name: 'Jane' })
-        }
-      />
+        <View>
+            <FavoritesDestinationsContainer navigation={navigation}/>
+        </View>
     );
   }
 }
