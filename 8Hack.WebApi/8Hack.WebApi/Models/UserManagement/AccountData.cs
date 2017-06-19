@@ -4,7 +4,7 @@ namespace _8Hack.WebApi.Models.UserManagement
 {
     public class AccountData
     {
-        public UserDetails User { get; set; }
+        public UserDetails UserDetails { get; set; }
         public SavedDestinations SavedDestinations { get; set; }
     }
 }
