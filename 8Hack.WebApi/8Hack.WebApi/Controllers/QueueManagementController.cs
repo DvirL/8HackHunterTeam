@@ -6,6 +6,7 @@ using System.Web.Http;
 using _8Hack.WebApi.DAL.Interfaces;
 using _8Hack.WebApi.Models.Common;
 using _8Hack.WebApi.Models.QueueManagement;
+using _8Hack.WebApi.Models.UserManagement;
 
 namespace _8Hack.WebApi.Controllers
 {
@@ -34,12 +35,14 @@ namespace _8Hack.WebApi.Controllers
 
         [HttpGet]
         [Route("Queue")]
-        public DestinationQueue GetDestinationsQueue(string destinationId)
+        public int GetPlaceInQueue(string destinationId, string userId)
         {
             // Get destination queue according to destinationId
             var requestedDestination = _destinationsStorage.GetDestination(destinationId);
             var requestedQueue = _queueStorage.GetQueue(requestedDestination);
-            return requestedQueue;
+            var subscribersIds = requestedQueue.Subscribers.Select(details => details.Id).ToList();
+            var placeInQueue = subscribersIds.IndexOf(userId);
+            return placeInQueue;
         }
 
         [HttpPost]
