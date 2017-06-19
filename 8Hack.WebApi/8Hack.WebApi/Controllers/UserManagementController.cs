@@ -8,7 +8,6 @@ namespace _8Hack.WebApi.Controllers
     [RoutePrefix("/api/users")]
     public class UserManagementController : ApiController
     {
-        // TODO:
         [Route("register")]
         [HttpGet]
         public bool Register(string username, string password)
@@ -18,16 +17,16 @@ namespace _8Hack.WebApi.Controllers
         }
 
         [HttpGet]
-        [Route("SavedDestinations")]
-        public SavedDestinations GetSavedDestinations(Guid userGuid)
+        [Route("/SavedDestinations")]
+        public SavedDestinations GetSavedDestinations([FromUri] string userId)
         {
             // Get saved destinations according to user by guid
             throw new NotImplementedException();
         }
 
         [HttpPost]
-        [Route("SavedDestinations")]
-        public bool UpdateSavedDestinations(Guid userGuid, SavedDestinations savedDestinations)
+        [Route("/SavedDestinations")]
+        public bool UpdateSavedDestinations(string userId, SavedDestinations savedDestinations)
         {
             // Overwrite the saved destinatinos
             throw new NotImplementedException();
