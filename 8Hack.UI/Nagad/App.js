@@ -3,16 +3,14 @@ import { StyleSheet, Text, View } from 'react-native';
 import {
   StackNavigator,
 } from 'react-navigation';
-
+/*
 import HomeScreen from './components/'
 const App = StackNavigator({
   Home: { screen: HomeScreen },
   Profile: { screen: ProfileScreen },
 });
-
-export default App;
-
-/*export default class App extends React.Component {
+*/
+export default class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
@@ -22,7 +20,7 @@ export default App;
       </View>
     );
   }
-}*/
+}
 
 const styles = StyleSheet.create({
   container: {
