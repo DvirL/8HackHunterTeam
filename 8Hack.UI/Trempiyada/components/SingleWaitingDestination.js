@@ -12,9 +12,11 @@ export default class SingleWaitingDestination extends Component {
     getWaitingCounterForDestination(){
         return 4;
     }
+
+
     
     render() {
-        const {destinationData} = this.props;
+        const {destinationData,removeDestination} = this.props;
         return (
 
                 <Content>
@@ -22,7 +24,8 @@ export default class SingleWaitingDestination extends Component {
                         <View style={styles.container}>
                         <Text>{destinationData.name}</Text>
                             <Text>מיקומך בתור: {this.getWaitingCounterForDestination()}</Text>
-                        <Button transparent primary >
+                        <Button transparent primary
+                                onPress={()=>removeDestination(destinationData.id)}>
                             <Icon name='close' />
                         </Button>
                             </View>

@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import { Platform, StatusBar } from 'react-native';
 import {
   StackNavigator,
 } from 'react-navigation';
@@ -8,11 +9,17 @@ import HomeScreen from './components/HomeScreen'
 import WaitingScreen from './containers/WaitingScreen'
 import SearchScreen from './containers/SearchScreen'
 
-const App = StackNavigator({
+const App =
+    StackNavigator({
       Home: { screen: HomeScreen },
       WaitingScreen: { screen: WaitingScreen },
       SearchScreen: {screen: SearchScreen}
-});
+    },
+        {
+            cardStyle: {
+                paddingTop: Platform.OS === 'ios' ? 0 : StatusBar.currentHeight
+            }
+        });
 
 export default App;
 
