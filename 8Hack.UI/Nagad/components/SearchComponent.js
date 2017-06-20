@@ -1,19 +1,29 @@
 import React, {Component} from 'react';
 import {Text, Header, Item, Input,Icon} from 'native-base'
 import {View, FlatList, StyleSheet} from 'react-native'
-import getDestinations from '../DestinationFetcher'
+import {getDestinations} from '../DestinationFetcher'
 
 export default class SearchComponent extends Component {
+
     constructor(props) {
         super(props);
 
-        var fullDataList = getDestinations();
+        var fullDataList = getDestinations(this.handleResponse);
+
+        window.self = this;
 
         this.state = {
-            searchTerm : 'Hello Nagad',
-            fullList: fullDataList,
-            filteredList : fullDataList
-        };
+            fullList: [],
+            filteredList : []};
+    }
+
+    handleResponse(response){
+        var list = response.map(window.self.props.itemTransform);
+        console.log(list);
+
+        window.self.setState({
+            fullList: list,
+            filteredList : list});
     }
 
     textChanged(text){

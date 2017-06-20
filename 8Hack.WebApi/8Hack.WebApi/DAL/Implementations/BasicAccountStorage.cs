@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using Microsoft.Ajax.Utilities;
 using _8Hack.WebApi.DAL.Interfaces;
+using _8Hack.WebApi.Models.Common;
 using _8Hack.WebApi.Models.UserManagement;
 
 namespace _8Hack.WebApi.DAL.Implementations
@@ -15,6 +16,32 @@ namespace _8Hack.WebApi.DAL.Implementations
         public BasicAccountStorage()
         {
             _accounts = new List<AccountData>();
+
+            _accounts.Add(new AccountData()
+            {
+                UserDetails = new UserDetails()
+                {
+                    Id = "1234",
+                    Name = "מרקו"
+                },
+                SavedDestinations = new SavedDestinations()
+                {
+                    Home = new DestinationGroup(),
+                    Favourites = new List<DestinationGroup>()
+                    {
+                        new DestinationGroup()
+                        {
+                            Name = "אמא",
+                            Destinations = new List<Destination>()
+                            {
+                                new Destination() { Id = "10", Name = "דן" },
+                                new Destination() { Id = "9", Name = "אילת" },
+                                new Destination() {Id = "1", Name = "רכבת תל אביב האוניברסיטה"}
+                            }
+                        }
+                    }
+                }
+            });
         }
 
         public AccountData GetAccount(string userId)
