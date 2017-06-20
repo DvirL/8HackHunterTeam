@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { FlatList , View } from 'react-native';
+import { FlatList , View, Text, StyleSheet } from 'react-native';
 import WaitingQueueItem from "../components/WaitingQueueItem";
 import {getWaitingQueue, removeFromWaitingQueue} from '../DestinationFetcher';
 
@@ -8,7 +8,7 @@ export default class WatingQueueContainer extends Component {
         super(props);
         const {destinationId} = this.props;
 
-        this.state = {queue: []};
+        this.state = {queue: [], loading: true};
 
         this.getWaitingQueueFromServer(destinationId);
     }
@@ -22,7 +22,7 @@ export default class WatingQueueContainer extends Component {
         {
             console.log('got from server : ' + waitingList);
             waitingList = waitingList.map(w=> {return {key:w.id, name:w.name};});
-            thisSelf.setState({queue: waitingList});
+            thisSelf.setState({queue: waitingList, loading:false});
         });
     }
 
@@ -40,13 +40,38 @@ export default class WatingQueueContainer extends Component {
     }
 
     render() {
-        return (
-            <View>
-                <FlatList
-                    data={this.state.queue}
-                    renderItem={({item}) => <WaitingQueueItem item={item} deleteFromQueue={this.deleteFromQueue}/>}
-            />
-            </View>
-        );
+        const {queue, loading} = this.state;
+        if(loading){
+            return(
+                <View style={styles.textContainer}>
+                    <Text style={styles.text}>טוען...</Text>
+                </View>
+            );
+        }
+        if (queue.length == 0){
+            return(
+                <View style={styles.textContainer}>
+                    <Text style={styles.text}>אין אף אחד שממתין בתור :)</Text>
+                </View>
+            );
+        }
+        else{
+            return (
+                <View>
+                    <FlatList
+                        data={this.state.queue}
+                        renderItem={({item}) => <WaitingQueueItem item={item} deleteFromQueue={this.deleteFromQueue}/>}
+                    />
+                </View>
+            );
+        }
     }
 }
+
+const styles = StyleSheet.create({
+    text: {
+        fontSize: 20,
+        textAlign: 'center',
+        marginTop: 6
+    }
+});
