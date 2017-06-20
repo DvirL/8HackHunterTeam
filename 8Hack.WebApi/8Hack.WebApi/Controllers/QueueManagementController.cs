@@ -42,7 +42,7 @@ namespace _8Hack.WebApi.Controllers
             var requestedQueue = _queueStorage.GetQueue(requestedDestination);
             var subscribersIds = requestedQueue.Subscribers.Select(details => details.Id).ToList();
             var placeInQueue = subscribersIds.IndexOf(userId);
-            return placeInQueue;
+            return placeInQueue + 1;
         }
 
         [HttpPost]

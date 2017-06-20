@@ -24,8 +24,8 @@
       <file leaf-file-name="WaitingScreen.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/containers/WaitingScreen.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="175">
-              <caret line="50" column="20" selection-start-line="50" selection-start-column="20" selection-end-line="50" selection-end-column="20" />
+            <state relative-caret-position="204">
+              <caret line="15" column="29" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="29" />
               <folding>
                 <element signature="e#0#38#0" expanded="true" />
               </folding>
@@ -33,10 +33,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SingleWaitingDestination.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="SingleWaitingDestination.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/components/SingleWaitingDestination.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="364">
+            <state relative-caret-position="255">
               <caret line="33" column="15" selection-start-line="33" selection-start-column="15" selection-end-line="33" selection-end-column="15" />
               <folding>
                 <element signature="e#0#39#0" expanded="true" />
@@ -62,7 +62,7 @@
       <file leaf-file-name="SearchScreen.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/containers/SearchScreen.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
+            <state relative-caret-position="17">
               <caret line="94" column="47" selection-start-line="94" selection-start-column="47" selection-end-line="94" selection-end-column="47" />
               <folding>
                 <element signature="e#0#39#0" expanded="true" />
@@ -83,11 +83,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="FavoritesDestinationsContainer.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="FavoritesDestinationsContainer.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/containers/FavoritesDestinationsContainer.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="56" column="34" selection-start-line="56" selection-start-column="34" selection-end-line="56" selection-end-column="34" />
+            <state relative-caret-position="425">
+              <caret line="94" column="26" selection-start-line="94" selection-start-column="26" selection-end-line="94" selection-end-column="26" />
               <folding>
                 <element signature="e#0#38#0" expanded="true" />
               </folding>
@@ -98,8 +98,8 @@
       <file leaf-file-name="FavoriteDestination.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/components/FavoriteDestination.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="4" column="6" selection-start-line="4" selection-start-column="6" selection-end-line="4" selection-end-column="6" />
+            <state relative-caret-position="243">
+              <caret line="20" column="19" selection-start-line="20" selection-start-column="19" selection-end-line="20" selection-end-column="19" />
               <folding>
                 <element signature="e#0#38#0" expanded="true" />
               </folding>
@@ -126,12 +126,12 @@
         <option value="$PROJECT_DIR$/components/SingleSearchDestination.js" />
         <option value="$PROJECT_DIR$/App.js" />
         <option value="$PROJECT_DIR$/containers/SearchScreen.js" />
-        <option value="$PROJECT_DIR$/components/FavoriteDestination.js" />
-        <option value="$PROJECT_DIR$/containers/FavoritesDestinationsContainer.js" />
         <option value="$PROJECT_DIR$/components/HomeScreen.js" />
         <option value="$PROJECT_DIR$/containers/WelcomeScreen.js" />
-        <option value="$PROJECT_DIR$/containers/WaitingScreen.js" />
         <option value="$PROJECT_DIR$/components/SingleWaitingDestination.js" />
+        <option value="$PROJECT_DIR$/containers/WaitingScreen.js" />
+        <option value="$PROJECT_DIR$/components/FavoriteDestination.js" />
+        <option value="$PROJECT_DIR$/containers/FavoritesDestinationsContainer.js" />
       </list>
     </option>
   </component>
@@ -297,12 +297,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1497859927080</updated>
-      <workItem from="1497859928401" duration="54950000" />
+      <workItem from="1497859928401" duration="56103000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="54950000" />
+    <option name="totallyTimeSpent" value="56103000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -429,6 +429,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/containers/WelcomeScreen.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="44" column="15" selection-start-line="34" selection-start-column="8" selection-end-line="44" selection-end-column="15" />
+          <folding>
+            <element signature="e#0#39#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/components/HomeScreen.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
@@ -441,19 +451,19 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/containers/WelcomeScreen.js">
+    <entry file="file://$PROJECT_DIR$/components/FavoriteDestination.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="44" column="15" selection-start-line="34" selection-start-column="8" selection-end-line="44" selection-end-column="15" />
+        <state relative-caret-position="243">
+          <caret line="20" column="19" selection-start-line="20" selection-start-column="19" selection-end-line="20" selection-end-column="19" />
           <folding>
-            <element signature="e#0#39#0" expanded="true" />
+            <element signature="e#0#38#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/containers/SearchScreen.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
+        <state relative-caret-position="17">
           <caret line="94" column="47" selection-start-line="94" selection-start-column="47" selection-end-line="94" selection-end-column="47" />
           <folding>
             <element signature="e#0#39#0" expanded="true" />
@@ -461,42 +471,32 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/containers/FavoritesDestinationsContainer.js">
+    <entry file="file://$PROJECT_DIR$/components/SingleWaitingDestination.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="56" column="34" selection-start-line="56" selection-start-column="34" selection-end-line="56" selection-end-column="34" />
+        <state relative-caret-position="255">
+          <caret line="33" column="15" selection-start-line="33" selection-start-column="15" selection-end-line="33" selection-end-column="15" />
           <folding>
-            <element signature="e#0#38#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/components/FavoriteDestination.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="6" selection-start-line="4" selection-start-column="6" selection-end-line="4" selection-end-column="6" />
-          <folding>
-            <element signature="e#0#38#0" expanded="true" />
+            <element signature="e#0#39#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/containers/WaitingScreen.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="175">
-          <caret line="50" column="20" selection-start-line="50" selection-start-column="20" selection-end-line="50" selection-end-column="20" />
+        <state relative-caret-position="204">
+          <caret line="15" column="29" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="29" />
           <folding>
             <element signature="e#0#38#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/components/SingleWaitingDestination.js">
+    <entry file="file://$PROJECT_DIR$/containers/FavoritesDestinationsContainer.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="364">
-          <caret line="33" column="15" selection-start-line="33" selection-start-column="15" selection-end-line="33" selection-end-column="15" />
+        <state relative-caret-position="425">
+          <caret line="94" column="26" selection-start-line="94" selection-start-column="26" selection-end-line="94" selection-end-column="26" />
           <folding>
-            <element signature="e#0#39#0" expanded="true" />
+            <element signature="e#0#38#0" expanded="true" />
           </folding>
         </state>
       </provider>

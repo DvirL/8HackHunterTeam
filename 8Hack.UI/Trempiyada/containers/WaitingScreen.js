@@ -14,10 +14,12 @@ export default class WaitingScreen extends Component {
 
     componentDidMount = () =>{
         var {destinationsList,userId} = this.props.navigation.state.params;
-        destinationsList.forEach((destination)=>{
-            this.registerAtServer(destination,userId)
-        })
-        this.setState({destinationsList: destinationsList})
+        if(destinationsList) {
+            destinationsList.forEach((destination)=> {
+                this.registerAtServer(destination, userId)
+            })
+            this.setState({destinationsList: destinationsList})
+        }
     }
 
     removeDestination = (destinationId, userId)=>{

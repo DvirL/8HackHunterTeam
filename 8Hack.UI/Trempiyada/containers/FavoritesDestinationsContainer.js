@@ -26,7 +26,7 @@ export default class FavoritesDestinationsContainer extends Component {
     }
 
     fetchFavorites(){
-        var favorites = [{name:"dummy",destinationsList:[{name: "תל אביב",checked: false, id:1234},]}];
+        var favorites = [];
         this.setState({
             dataSource: this.state.dataSource.cloneWithRows(favorites),
             favorites,
@@ -41,16 +41,14 @@ export default class FavoritesDestinationsContainer extends Component {
             favorites: newFavorties,
             dataSource: ds.cloneWithRows(newFavorties)
         })
-        
-
-
     }
 
     startRide = (checkedData) => {
         var {navigate} = this.props.navigation;
         var {userId} = this.props;
+        this.setState({currentRide: checkedData});
         navigate('WaitingScreen', {destinationsList:checkedData,
-                                    userId:userId});
+            userId:userId});
     }
 
     createSingleDestination(destinationData, navigation){
@@ -58,12 +56,14 @@ export default class FavoritesDestinationsContainer extends Component {
         return (
             <FavoriteDestination destinationData = {destinationData}
                                  navigation={navigation}
-                                userId={userId}/>
+                                 userId={userId}
+                                 startRide={this.startRide}/>
         )
     }
 
     render() {
-        const {navigation} = this.props;
+        const {navigation, userId} = this.props;
+        const {currentRide} = this.state;
         return (
             <View>
                 <View>
@@ -85,6 +85,13 @@ export default class FavoritesDestinationsContainer extends Component {
 
                         })}>
                         <Icon name="add" />
+                    </Fab>
+                    <Fab
+                        containerStyle={{ marginLeft: 10 }}
+                        style={{ backgroundColor: 'blue' }}
+                        position="topRight"
+                        onPress={() => navigation.navigate('WaitingScreen',{userId: userId,destinationsList:currentRide})}>
+                        <Icon name="car" />
                     </Fab>
                 </View>
             </View>
