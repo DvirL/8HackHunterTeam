@@ -15,7 +15,7 @@ export default class SearchScreen extends Component {
 
     itemSearchPredicate(item, text){
         console.log('Predicate against : ' + item + ' and ' + text +' returned : ' + (item.key.indexOf(text) !== -1))
-        return item.key.toLowerCase().indexOf(text.toLowerCase()) !== -1;
+        return item.name.toLowerCase().indexOf(text.toLowerCase()) !== -1;
     }
 
     transformSingleDestination(destination){
