@@ -20,7 +20,7 @@ namespace _8Hack.WebApi.Controllers
 
         [HttpPost]
         [Route("Register")]
-        public AccountData Register(string username, string password, string name)
+        public AccountData Register(string name)
         {
             var newUserDetails = new UserDetails()
             {

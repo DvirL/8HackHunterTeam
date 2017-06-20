@@ -1,22 +1,25 @@
 import React, {Component} from 'react';
-import {Text, Header, Item, Input,Icon} from 'native-base'
-import {View, ListView, StyleSheet, Button} from 'react-native'
+import { Header, Item, Input,Icon} from 'native-base'
+import {Text, View, ListView, StyleSheet, Button, TextInput} from 'react-native'
 import SingleSearchDestination from '../components/SingleSearchDestination'
-import PopupDialog from 'react-native-popup-dialog';
+import PopupDialog, {DialogButton} from 'react-native-popup-dialog';
 
 
 const data=[
     {
         name: "תל אביב",
         checked: false,
+        id:1234
     },
     {
         name: "רמת גן",
         checked: false,
+        id: 456
     },
     {
         name: "באר שבע",
         checked: false,
+        id:8
     },
 ]
 
@@ -55,6 +58,10 @@ export default class SearchScreen extends Component {
         })
     }
 
+    favoriteNameChanged = (text)=>{
+        this.setState({favoriteName: text})
+    }
+
     onChecked(destinationData){
         var destinationIndex = data.findIndex((destination)=> {return destination.name === destinationData.name});
         data[destinationIndex].checked = true;
@@ -66,15 +73,26 @@ export default class SearchScreen extends Component {
     }
 
     addToFavorites = () =>{
+        var checkedData = this.extractSelectedValuesAndDisable()
+        var favoriteName = this.state.favoriteName;
+        this.props.navigation.state.params.addToFavorites(checkedData, favoriteName);
+    }
+
+    startRide = () => {
+        var checkedData = this.extractSelectedValuesAndDisable()
+        this.props.navigation.state.params.startRide(checkedData);
+    }
+
+    extractSelectedValuesAndDisable = () =>{
         var checkedData = data.filter((destination) => {
             return destination.checked;
-        })
-        this.props.navigation.state.params.addToFavorites(checkedData);
+        });
+        data.forEach((destination)=>{destination.checked=false;})
+        return checkedData;
     }
 
     render() {
         const {dataSource} = this.state;
-        var {startRide} = this.props.navigation.state.params;
 
         return (
             <View style={styles.container}>
@@ -87,21 +105,39 @@ export default class SearchScreen extends Component {
                     </Item>
                 </Header>
                 <ListView
+                    enableEmptySections={true}
                     dataSource={dataSource}
                     renderRow={(rowData) => this.createSingleSearchDestination(rowData)}
                 />
-                <PopupDialog ref={(popupDialog) => { this.popupDialog = popupDialog; }}>
-                    <View>
-                        <Text>הכנס שם למועדף:</Text>
-                    </View>
-                </PopupDialog>
+
                 <View style={styles.buttonContainer}>
                     <Button title="הוסף למועדפים"
                             onPress={()=>this.popupDialog.show() }/>
                     <Button title="בקש טרמפ"
-                            onPress={()=>startRide}/>
+                            onPress={()=>this.startRide()}/>
 
                 </View>
+
+                    <PopupDialog style={styles.modal}
+                        ref={(popupDialog) => { this.popupDialog = popupDialog; }}
+                        height={150}
+                        actions={[
+                             <DialogButton
+                                buttonStyle={{paddingTop: 10}}
+                                textContainerStyle={{backgroundColor:'#2fe5f9',height:50}}
+                                text="הוסף"
+                                onPress={() => {this.addToFavorites();}}
+                                key="dvir"/>,
+                             ]}>
+                        <View>
+                            <Text style={styles.popupModal}>הכנס שם למועדף:</Text>
+                            <Item>
+                                <Input placeholder="הכנס שם המועדף (בית, עבודה,...)"
+                                       onChangeText={(text)=>this.favoriteNameChanged(text)}/>
+                            </Item>
+                        </View>
+                    </PopupDialog>
+
             </View>
         )
     }
@@ -119,7 +155,14 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'column',
         justifyContent: 'center'
-    }
+    },
+    popupModal :{
+        textAlign: 'center',
+        fontSize: 20
+    },
+    modal:{
+      marginBottom:30
+    },
 });
 
 /**/

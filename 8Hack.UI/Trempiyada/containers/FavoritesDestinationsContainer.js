@@ -24,27 +24,33 @@ export default class FavoritesDestinationsContainer extends Component {
     }
 
     fetchFavorites(){
-        var favorites = [];
+        var favorites = [{name:"dummy",destinationsList:[{name: "תל אביב",checked: false, id:1234},]}];
         this.setState({
             dataSource: this.state.dataSource.cloneWithRows(favorites),
             favorites,
         })
     }
 
-    addToFavorites(favoriteData){
+    addToFavorites(favoriteData, favoriteName){
         var favorites = this.state.favorites;
         var ds = this.state.dataSource;
-        var newFavorties = favorites.concat({name: "חדש", destinationsList: favoriteData});
+        var newFavorties = favorites.concat({name: favoriteName, destinationsList: favoriteData});
         this.setState({
-            newFavorties,
+            favorites: newFavorties,
             dataSource: ds.cloneWithRows(newFavorties)
         })
+    }
+
+    startRide = (checkedData) => {
+        console.log('got here')
+        var {navigate} = this.props.navigation;
+        navigate('WaitingScreen', {destinationsList:checkedData});
     }
 
     createSingleDestination(destinationData, navigation){
         return (
             <FavoriteDestination destinationData = {destinationData}
-                                 navigation={navigation }/>
+                                 navigation={navigation}/>
         )
     }
 
@@ -55,6 +61,7 @@ export default class FavoritesDestinationsContainer extends Component {
                 <View>
                     <Text> אני רוצה לנסוע ל</Text>
                     <ListView
+                        enableEmptySections={true}
                         dataSource={this.state.dataSource}
                         renderRow={(rowData) => this.createSingleDestination(rowData, navigation)}
                     />
@@ -64,7 +71,11 @@ export default class FavoritesDestinationsContainer extends Component {
                         containerStyle={{ marginLeft: 10 }}
                         style={{ backgroundColor: 'red' }}
                         position="topLeft"
-                        onPress={() => navigation.navigate('SearchScreen',{addToFavorites: this.addToFavorites})}>
+                        onPress={() => navigation.navigate('SearchScreen',{
+                                addToFavorites: this.addToFavorites,
+                                startRide: this.startRide,
+
+                        })}>
                         <Icon name="add" />
                     </Fab>
                 </View>
