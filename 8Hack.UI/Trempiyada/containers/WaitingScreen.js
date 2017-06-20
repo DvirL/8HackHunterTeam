@@ -1,6 +1,7 @@
 import React,{Component} from 'react';
-import {Text, ListView} from 'react-native'
+import {Text, ListView, View} from 'react-native'
 import SingleWaitingDestination from '../components/SingleWaitingDestination'
+import {HeaderBackButton} from 'react-navigation'
 
 export default class WaitingScreen extends Component {
     constructor(props){
@@ -8,9 +9,10 @@ export default class WaitingScreen extends Component {
         this.state = {destinationsList:[]}
     }
 
-    static navigationOptions = {
-        title: 'ממתין לטרמפ...',
-    };
+    static navigationOptions = ({ navigation }) => ({
+        title:'ממתין לטרמפ...',
+        
+    });
 
     componentDidMount = () =>{
         var {destinationsList,userId} = this.props.navigation.state.params;
@@ -27,6 +29,7 @@ export default class WaitingScreen extends Component {
             return true;
         }})
         this.removeRegisterAtServer(destinationId, userId);
+        this.props.navigation.state.params.updateDestinations(newDestinations);
         this.setState({destinationsList:newDestinations})
     }
 
@@ -64,12 +67,22 @@ export default class WaitingScreen extends Component {
         const {destinationsList} = this.state;
         const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
         const dataSource = ds.cloneWithRows(destinationsList)
-        return (
-            <ListView
+
+        if(destinationsList.length === 0){
+            return (
+                <View style={{flex:1,alignItems:'center'}}>
+                    <Text style={{fontSize: 30, marginTop:30}}>אין לך כרגע נסיעה</Text>
+                    <Text style={{fontSize: 20, marginTop:20}}>חזור למסך הבית כדי להתחיל נסיעה חדשה</Text>
+                </View>
+            )
+        }
+        else {
+            return <ListView
                 enableEmptySections={true}
                 dataSource={dataSource}
                 renderRow={(destinationData) => this.createSingleWaitingDestination(destinationData)}
             />
-        );
+        }
+
     }
 }

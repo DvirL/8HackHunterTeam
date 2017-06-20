@@ -34,8 +34,8 @@ namespace _8Hack.WebApi.DAL.Implementations
                             Name = "אמא",
                             Destinations = new List<Destination>()
                             {
-                                new Destination() { Id = "10", Name = "דן" },
-                                new Destination() { Id = "9", Name = "אילת" },
+                                new Destination() { Id = "7", Name = "דן" },
+                                new Destination() { Id = "6", Name = "אילת" },
                                 new Destination() {Id = "1", Name = "רכבת תל אביב האוניברסיטה"}
                             }
                         }

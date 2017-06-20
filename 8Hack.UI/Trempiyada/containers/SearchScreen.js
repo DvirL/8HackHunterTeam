@@ -22,6 +22,11 @@ export default class SearchScreen extends Component {
 
     }
 
+    static navigationOptions = ({ navigation }) => ({
+        title:'בחר יעד/ים',
+        headerTitleStyle :{textAlign: 'center',alignSelf:'center',marginRight:40}
+    });
+
     componentDidMount = ()=>{
          this.fetchFromServer()
     }
@@ -78,8 +83,10 @@ export default class SearchScreen extends Component {
     }
 
     createSingleSearchDestination(destinationData){
+        console.log('got here')
         return <SingleSearchDestination destinationData={destinationData}
-                                        onChecked={this.onChecked}/>
+                                        onChecked={this.onChecked}
+                                        checked={destinationData.checked}/>
     }
 
     addToFavorites = () =>{
@@ -106,7 +113,6 @@ export default class SearchScreen extends Component {
 
     render() {
         const {dataSource} = this.state;
-
         return (
             <View style={styles.container}>
                 <Header searchBar rounded>
@@ -128,10 +134,9 @@ export default class SearchScreen extends Component {
                             onPress={()=>this.popupDialog.show() }/>
                     <Button title="בקש טרמפ"
                             onPress={()=>this.startRide()}/>
-
                 </View>
 
-                    <PopupDialog style={styles.modal}
+                    <PopupDialog dialogStyle={{marginTop:-300}}
                         ref={(popupDialog) => { this.popupDialog = popupDialog; }}
                         height={150}
                         actions={[
@@ -150,8 +155,8 @@ export default class SearchScreen extends Component {
                             </Item>
                         </View>
                     </PopupDialog>
+                </View>
 
-            </View>
         )
     }
 }
@@ -162,20 +167,18 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-around',
-
     },
     container:{
         flex: 1,
         flexDirection: 'column',
-        justifyContent: 'center'
+        justifyContent: 'space-between',
+
     },
     popupModal :{
         textAlign: 'center',
         fontSize: 20
     },
-    modal:{
-      marginBottom:30
-    },
+
 });
 
 /*[

@@ -17,9 +17,6 @@ export default class FavoritesDestinationsContainer extends Component {
         };
 
     }
-    static navigationOptions = {
-        title: 'היי נדב',
-    };
 
     componentDidMount = ()=> {
         this.fetchFavorites();
@@ -47,8 +44,10 @@ export default class FavoritesDestinationsContainer extends Component {
         var {navigate} = this.props.navigation;
         var {userId} = this.props;
         this.setState({currentRide: checkedData});
-        navigate('WaitingScreen', {destinationsList:checkedData,
-            userId:userId});
+        navigate('WaitingScreen', {
+            destinationsList:checkedData,
+            userId:userId,
+            updateDestinations: this.updateDestinations});
     }
 
     createSingleDestination(destinationData, navigation){
@@ -61,13 +60,17 @@ export default class FavoritesDestinationsContainer extends Component {
         )
     }
 
+    updateDestinations = (newDestinations) => {
+        this.setState({currentRide: newDestinations})
+    }
+
     render() {
         const {navigation, userId} = this.props;
         const {currentRide} = this.state;
         return (
             <View>
-                <View>
-                    <Text> לאן תרצה לנסוע?</Text>
+                <View >
+                    <Text style={{textAlign:'center',fontSize:50, marginBottom:10}}> לאן תרצה לנסוע?</Text>
                     <ListView
                         enableEmptySections={true}
                         dataSource={this.state.dataSource}
@@ -76,8 +79,7 @@ export default class FavoritesDestinationsContainer extends Component {
                 </View>
                 <View>
                     <Fab
-                        containerStyle={{ marginLeft: 10 }}
-                        style={{ backgroundColor: 'red' }}
+                        style={{ backgroundColor: 'red'}}
                         position="topLeft"
                         onPress={() => navigation.navigate('SearchScreen',{
                                 addToFavorites: this.addToFavorites,
@@ -87,10 +89,10 @@ export default class FavoritesDestinationsContainer extends Component {
                         <Icon name="add" />
                     </Fab>
                     <Fab
-                        containerStyle={{ marginLeft: 10 }}
                         style={{ backgroundColor: 'blue' }}
                         position="topRight"
-                        onPress={() => navigation.navigate('WaitingScreen',{userId: userId,destinationsList:currentRide})}>
+                        onPress={() => navigation.navigate('WaitingScreen',{userId: userId,destinationsList:currentRide,
+                                                                            updateDestinations: this.updateDestinations})}>
                         <Icon name="car" />
                     </Fab>
                 </View>
@@ -100,9 +102,9 @@ export default class FavoritesDestinationsContainer extends Component {
 }
 
 const styles = StyleSheet.create({
-    addButtonContainer: {
+    container: {
         flex: 1,
-        alignItems: 'flex-end',
+        flexDirection: 'column',
         justifyContent: 'center',
     },
 });

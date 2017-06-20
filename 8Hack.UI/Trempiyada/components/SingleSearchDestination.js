@@ -8,6 +8,14 @@ export default class SingleSearchDestination extends Component {
         this.onPress = this.onPress.bind(this);
     }
 
+    componentDidMount = () => {
+        this.setState({checked:this.props.checked})
+    }
+
+    componentWillReceiveProps = (nextProps) => {
+        this.setState({checked:nextProps.checked})
+    }
+
     onPress(){
         var checked = this.state.checked;
         this.setState({checked:!checked})
@@ -21,7 +29,7 @@ export default class SingleSearchDestination extends Component {
             <ListItem>
                 <CheckBox checked={checked}
                           onPress={this.onPress}/>
-                <Text>{destinationData.name}</Text>
+                <Text style={{margin:5}}>{destinationData.name}</Text>
             </ListItem>
         )
     }
