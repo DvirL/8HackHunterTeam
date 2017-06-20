@@ -45,6 +45,16 @@ namespace _8Hack.WebApi.Controllers
             return placeInQueue + 1;
         }
 
+        [HttpGet]
+        [Route("FullQueue")]
+        public IEnumerable<UserDetails> GetQueue(string destinationId)
+        {
+            // Get destination queue according to destinationId
+            var requestedDestination = _destinationsStorage.GetDestination(destinationId);
+            var requestedQueue = _queueStorage.GetQueue(requestedDestination).Subscribers;
+            return requestedQueue;
+        }
+
         [HttpPost]
         [Route("Queue")]
         public bool RegisterToQueue(string userId, string destinationId)

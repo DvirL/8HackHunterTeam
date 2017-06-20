@@ -1,45 +1,77 @@
 import React, {Component} from 'react';
-import { FlatList , View } from 'react-native';
+import { FlatList , View, Text, StyleSheet } from 'react-native';
 import WaitingQueueItem from "../components/WaitingQueueItem";
+import {getWaitingQueue, removeFromWaitingQueue} from '../DestinationFetcher';
 
 export default class WatingQueueContainer extends Component {
     constructor(props) {
         super(props);
-        const {destinationName} = this.props;
+        const {destinationId} = this.props;
 
-        var waitingQueue = this.getWaitingQueue(destinationName);
+        this.state = {queue: [], loading: true};
 
-        this.state = {queue: waitingQueue};
+        this.getWaitingQueueFromServer(destinationId);
     }
 
-    getWaitingQueue(destinationName){
-        console.log('fetching queue');
-        return [
-            {key:'Eden', name:'עדן'},
-            {key:'Dvir', name:'דביר'},
-            {key:'Nadav', name:'נדב'},
-            {key:'Ben', name:'בן'},
-            {key:'Tomer', name:'תומר'}
-        ];
+    getWaitingQueueFromServer(destinationId){
+        console.log('fetching queue ' + destinationId);
+
+        var thisSelf = this;
+
+        getWaitingQueue(destinationId, (waitingList)=>
+        {
+            console.log('got from server : ' + waitingList);
+            waitingList = waitingList.map(w=> {return {key:w.id, name:w.name};});
+            thisSelf.setState({queue: waitingList, loading:false});
+        });
     }
 
-    deleteFromQueue = (userName, reason)=>{
-        console.log('removing ' + userName + ' because : ' + reason);
+    deleteFromQueue = (userId, reason)=>{
+        console.log('removing ' + userId + ' because : ' + reason);
         var newQueue = this.state.queue;
         newQueue = newQueue.filter((x)=>{
-            return x.name != userName;
+            return x.key != userId;
         });
         this.setState({queue: newQueue});
+
+        removeFromWaitingQueue(userId, (response)=>{
+            console.log('got response from server for deleting : ' + response.status);
+        });
     }
 
     render() {
-        return (
-            <View>
-                <FlatList
-                    data={this.state.queue}
-                    renderItem={({item}) => <WaitingQueueItem name={item.name} deleteFromQueue={this.deleteFromQueue}/>}
-            />
-            </View>
-        );
+        const {queue, loading} = this.state;
+        if(loading){
+            return(
+                <View style={styles.textContainer}>
+                    <Text style={styles.text}>טוען...</Text>
+                </View>
+            );
+        }
+        if (queue.length == 0){
+            return(
+                <View style={styles.textContainer}>
+                    <Text style={styles.text}>אין אף אחד שממתין בתור :)</Text>
+                </View>
+            );
+        }
+        else{
+            return (
+                <View>
+                    <FlatList
+                        data={this.state.queue}
+                        renderItem={({item}) => <WaitingQueueItem item={item} deleteFromQueue={this.deleteFromQueue}/>}
+                    />
+                </View>
+            );
+        }
     }
 }
+
+const styles = StyleSheet.create({
+    text: {
+        fontSize: 20,
+        textAlign: 'center',
+        marginTop: 6
+    }
+});

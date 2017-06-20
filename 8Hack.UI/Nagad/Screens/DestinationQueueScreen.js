@@ -11,13 +11,13 @@ export default class DestinationQueueScreen extends Component {
     }
 
     static navigationOptions = ({ navigation }) => ({
-        title: 'תור ל' + navigation.state.params.destinationName
+        title: 'תור ל' + navigation.state.params.destination.name
     });
 
     render() {
         return (
             <View>
-                <WatingQueueContainer/>
+                <WatingQueueContainer destinationId={this.props.navigation.state.params.destination.key}/>
             </View>
         );
     }
