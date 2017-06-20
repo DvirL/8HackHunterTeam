@@ -13,7 +13,7 @@ class FavoriteDestination extends Component {
 
         return (
             <View style={styles.container}>
-                <Button full onPress={()=>startRide(destinationData.destinationsList)}>
+                <Button style={{borderRadius:5}} full onPress={()=>startRide(destinationData.destinationsList)}>
                     <Text style={styles.text}>
                         {destinationData.name}
                     </Text>
@@ -27,7 +27,7 @@ export default FavoriteDestination;
 
 const styles = StyleSheet.create({
     container: {
-        marginTop: 5,
+        margin: 10,
     },
     text:{
         color: 'white'

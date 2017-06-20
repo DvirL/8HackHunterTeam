@@ -5,13 +5,11 @@ import FavoritesDestinationsContainer from '../containers/FavoritesDestinationsC
 class HomeScreen extends Component {
     static navigationOptions = ({ navigation }) => ({
         title: `היי ${navigation.state.params.name}`,
-        fontSize: 18,
-        backgroundColor: '#ccc',
+        headerTitleStyle :{textAlign: 'center',alignSelf:'center',marginRight:40},
     })
   render() {
       const {navigation} = this.props;
       const {userId} = this.props.navigation.state.params;
-      console.log('user id is '+ userId)
     return (
         <View>
             <FavoritesDestinationsContainer navigation={navigation}
