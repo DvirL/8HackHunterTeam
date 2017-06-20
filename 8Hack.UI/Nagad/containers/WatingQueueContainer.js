@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { FlatList , View } from 'react-native';
 import WaitingQueueItem from "../components/WaitingQueueItem";
-import {getWaitingQueue} from '../DestinationFetcher';
+import {getWaitingQueue, removeFromWaitingQueue} from '../DestinationFetcher';
 
 export default class WatingQueueContainer extends Component {
     constructor(props) {
@@ -33,6 +33,10 @@ export default class WatingQueueContainer extends Component {
             return x.key != userId;
         });
         this.setState({queue: newQueue});
+
+        removeFromWaitingQueue(userId, (response)=>{
+            console.log('got response from server for deleting : ' + response.status);
+        });
     }
 
     render() {
