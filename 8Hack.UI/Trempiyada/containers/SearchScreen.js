@@ -3,47 +3,56 @@ import { Header, Item, Input,Icon} from 'native-base'
 import {Text, View, ListView, StyleSheet, Button, TextInput} from 'react-native'
 import SingleSearchDestination from '../components/SingleSearchDestination'
 import PopupDialog, {DialogButton} from 'react-native-popup-dialog';
+import { NavigationActions } from 'react-navigation'
 
-
-const data=[
-    {
-        name: "תל אביב",
-        checked: false,
-        id:1234
-    },
-    {
-        name: "רמת גן",
-        checked: false,
-        id: 456
-    },
-    {
-        name: "באר שבע",
-        checked: false,
-        id:8
-    },
-]
 
 export default class SearchScreen extends Component {
     constructor(props) {
         super(props);
-        this.textChanged = this.textChanged.bind(this)
+        this.textChanged = this.textChanged.bind(this);
         const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-        const dataSource = ds.cloneWithRows(data)
+        const dataSource = ds.cloneWithRows([])
         this.state = {
             text: "hello",
             dataSource : dataSource,
-            rowData: data,
-            initalData: data,
+            rawData: [],
+            initialData: [],
             currentTextLength: 0,
         };
 
     }
 
+    componentDidMount = ()=>{
+         this.fetchFromServer()
+    }
+
+    fetchAllDestination = (data) => {
+        var ds = this.state.dataSource;
+        var dataSource = ds.cloneWithRows(data)
+        this.setState({
+            rawData: data,
+            initialData: data,
+            dataSource,
+        })
+    }
+
+    fetchFromServer(){
+        var url = 'http://weride.azurewebsites.net/api/queues/all';
+        fetch(url)
+            .then((response) => response.json())
+            .then((responseJson)=> {
+                this.fetchAllDestination(responseJson);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    }
+
     textChanged(text){
         if(text.length < this.state.currentTextLength){
-            var oldData = this.state.initalData;
+            var oldData = this.state.initialData;
         }else{
-            var oldData = this.state.rowData;
+            var oldData = this.state.rawData;
         }
         var newData = oldData.filter((destination)=>{
             if(destination.name.indexOf(text) !== -1){
@@ -52,7 +61,7 @@ export default class SearchScreen extends Component {
         })
         const dataSource = this.state.dataSource.cloneWithRows(newData);
         this.setState({
-            rowData:newData,
+            rawData:newData,
             dataSource,
             currentTextLength: text.length
         })
@@ -62,7 +71,8 @@ export default class SearchScreen extends Component {
         this.setState({favoriteName: text})
     }
 
-    onChecked(destinationData){
+    onChecked = (destinationData) => {
+        var data = this.state.initialData;
         var destinationIndex = data.findIndex((destination)=> {return destination.name === destinationData.name});
         data[destinationIndex].checked = true;
     }
@@ -76,6 +86,8 @@ export default class SearchScreen extends Component {
         var checkedData = this.extractSelectedValuesAndDisable()
         var favoriteName = this.state.favoriteName;
         this.props.navigation.state.params.addToFavorites(checkedData, favoriteName);
+        const backAction = NavigationActions.back();
+        this.props.navigation.dispatch(backAction)
     }
 
     startRide = () => {
@@ -84,6 +96,7 @@ export default class SearchScreen extends Component {
     }
 
     extractSelectedValuesAndDisable = () =>{
+        var data = this.state.initialData;
         var checkedData = data.filter((destination) => {
             return destination.checked;
         });
@@ -165,4 +178,20 @@ const styles = StyleSheet.create({
     },
 });
 
-/**/
+/*[
+ {
+ name: "תל אביב",
+ checked: false,
+ id:1234
+ },
+ {
+ name: "רמת גן",
+ checked: false,
+ id: 456
+ },
+ {
+ name: "באר שבע",
+ checked: false,
+ id:8
+ },
+ ];*/

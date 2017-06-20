@@ -42,7 +42,17 @@ namespace _8Hack.WebApi.Controllers
             var requestedQueue = _queueStorage.GetQueue(requestedDestination);
             var subscribersIds = requestedQueue.Subscribers.Select(details => details.Id).ToList();
             var placeInQueue = subscribersIds.IndexOf(userId);
-            return placeInQueue;
+            return placeInQueue + 1;
+        }
+
+        [HttpGet]
+        [Route("FullQueue")]
+        public IEnumerable<UserDetails> GetQueue(string destinationId)
+        {
+            // Get destination queue according to destinationId
+            var requestedDestination = _destinationsStorage.GetDestination(destinationId);
+            var requestedQueue = _queueStorage.GetQueue(requestedDestination).Subscribers;
+            return requestedQueue;
         }
 
         [HttpPost]
@@ -52,8 +62,8 @@ namespace _8Hack.WebApi.Controllers
             // Get UserDetails using destinationId, and register UserDetails to the destinationQueue using the destinationId
             var userToSubscribe = _accountStorage.GetAccount(userId);
             var destinationToSubscribeTo = _destinationsStorage.GetDestination(destinationId);
-            var userAlreadySubscribed = _queueStorage.GetQueue(destinationToSubscribeTo).Subscribers
-                .Select(s => s.Id == userToSubscribe.UserDetails.Id).Any();
+            var subscribers = _queueStorage.GetQueue(destinationToSubscribeTo).Subscribers;
+            var userAlreadySubscribed = subscribers.Select(details => details.Id).ToList().Contains(userId);
             if (userAlreadySubscribed)
             {
                 return true;

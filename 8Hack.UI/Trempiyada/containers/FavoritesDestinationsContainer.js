@@ -3,6 +3,8 @@ import { Container, Content, Button } from 'native-base';
 import {View, ListView, StyleSheet, ScrollView} from 'react-native'
 import {Text, ListItem, Fab, Icon} from 'native-base'
 import FavoriteDestination from '../components/FavoriteDestination'
+import { NavigationActions } from 'react-navigation'
+
 
 export default class FavoritesDestinationsContainer extends Component {
     constructor(props){
@@ -24,7 +26,7 @@ export default class FavoritesDestinationsContainer extends Component {
     }
 
     fetchFavorites(){
-        var favorites = [{name:"dummy",destinationsList:[{name: "תל אביב",checked: false, id:1234},]}];
+        var favorites = [];
         this.setState({
             dataSource: this.state.dataSource.cloneWithRows(favorites),
             favorites,
@@ -42,24 +44,30 @@ export default class FavoritesDestinationsContainer extends Component {
     }
 
     startRide = (checkedData) => {
-        console.log('got here')
         var {navigate} = this.props.navigation;
-        navigate('WaitingScreen', {destinationsList:checkedData});
+        var {userId} = this.props;
+        this.setState({currentRide: checkedData});
+        navigate('WaitingScreen', {destinationsList:checkedData,
+            userId:userId});
     }
 
     createSingleDestination(destinationData, navigation){
+        var {userId} = this.props;
         return (
             <FavoriteDestination destinationData = {destinationData}
-                                 navigation={navigation}/>
+                                 navigation={navigation}
+                                 userId={userId}
+                                 startRide={this.startRide}/>
         )
     }
 
     render() {
-        const {navigation} = this.props;
+        const {navigation, userId} = this.props;
+        const {currentRide} = this.state;
         return (
             <View>
                 <View>
-                    <Text> אני רוצה לנסוע ל</Text>
+                    <Text> לאן תרצה לנסוע?</Text>
                     <ListView
                         enableEmptySections={true}
                         dataSource={this.state.dataSource}
@@ -77,6 +85,13 @@ export default class FavoritesDestinationsContainer extends Component {
 
                         })}>
                         <Icon name="add" />
+                    </Fab>
+                    <Fab
+                        containerStyle={{ marginLeft: 10 }}
+                        style={{ backgroundColor: 'blue' }}
+                        position="topRight"
+                        onPress={() => navigation.navigate('WaitingScreen',{userId: userId,destinationsList:currentRide})}>
+                        <Icon name="car" />
                     </Fab>
                 </View>
             </View>
