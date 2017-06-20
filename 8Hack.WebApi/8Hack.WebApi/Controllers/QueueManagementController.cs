@@ -52,6 +52,12 @@ namespace _8Hack.WebApi.Controllers
             // Get UserDetails using destinationId, and register UserDetails to the destinationQueue using the destinationId
             var userToSubscribe = _accountStorage.GetAccount(userId);
             var destinationToSubscribeTo = _destinationsStorage.GetDestination(destinationId);
+            var userAlreadySubscribed = _queueStorage.GetQueue(destinationToSubscribeTo).Subscribers
+                .Select(s => s.Id == userToSubscribe.UserDetails.Id).Any();
+            if (userAlreadySubscribed)
+            {
+                return true;
+            }
             var successfulyRegisteredToQueue = _queueStorage.Subscribe(userToSubscribe.UserDetails, destinationToSubscribeTo);
             return successfulyRegisteredToQueue;
         }
