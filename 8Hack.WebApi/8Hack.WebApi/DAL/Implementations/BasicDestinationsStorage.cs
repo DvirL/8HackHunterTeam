@@ -15,12 +15,20 @@ namespace _8Hack.WebApi.DAL.Implementations
         {
             _destinations = new List<Destination>();
 
-            _destinations.Add(new Destination() {Id = Guid.NewGuid().ToString(), Name = "רכבת תל אביב האוניברסיטה"});
-            _destinations.Add(new Destination() { Id = Guid.NewGuid().ToString(), Name = "רמת השרון" });
-            _destinations.Add(new Destination() { Id = Guid.NewGuid().ToString(), Name = "הרצליה" });
+            _destinations.Add(new Destination() { Id = "1", Name = "רכבת תל אביב האוניברסיטה" });
+            _destinations.Add(new Destination() { Id = "2", Name = "רמת השרון" });
+            _destinations.Add(new Destination() { Id = "3", Name = "הרצליה פיתוח" });
+            _destinations.Add(new Destination() { Id = "4", Name = "דרך השלום" });
+            _destinations.Add(new Destination() { Id = "5", Name = "באר שבע" });
+            _destinations.Add(new Destination() { Id = "6", Name = "רכבת סבידור מרכז" });
+            _destinations.Add(new Destination() { Id = "7", Name = "ראשון לציון - מזרח" });
+            _destinations.Add(new Destination() { Id = "8", Name = "ראשון לציון - מערב" });
+            _destinations.Add(new Destination() { Id = "9", Name = "אילת" });
+            _destinations.Add(new Destination() { Id = "10", Name = "דן" });
         }
 
-        public IEnumerable<Destination> Destinations {
+        public IEnumerable<Destination> Destinations
+        {
             get { return _destinations; }
         }
 
