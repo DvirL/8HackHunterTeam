@@ -9,14 +9,16 @@ class FavoriteDestination extends Component {
 
     render() {
         const { navigate } = this.props.navigation;
-        const {destinationData} = this.props;
+        const {destinationData, userId} = this.props;
         return (
             <View style={styles.container}>
-                    <Button full onPress={()=>navigate('WaitingScreen', {destinationsList:destinationData.destinationsList})}>
-                        <Text style={styles.text}>
-                            {destinationData.name}
-                        </Text>
-                    </Button>
+                <Button full onPress={()=>navigate('WaitingScreen', {
+                    destinationsList:destinationData.destinationsList,
+                    userId: userId})}>
+                    <Text style={styles.text}>
+                        {destinationData.name}
+                    </Text>
+                </Button>
             </View>
         );
     }
@@ -28,7 +30,7 @@ const styles = StyleSheet.create({
     container: {
         marginTop: 5,
     },
-    text:{ 
+    text:{
         color: 'white'
     }
 });

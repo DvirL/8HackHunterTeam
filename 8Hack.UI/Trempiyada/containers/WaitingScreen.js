@@ -13,18 +13,49 @@ export default class WaitingScreen extends Component {
     };
 
     componentDidMount = () =>{
-        this.setState({destinationsList: this.props.navigation.state.params.destinationsList})
+        var {destinationsList,userId} = this.props.navigation.state.params;
+        destinationsList.forEach((destination)=>{
+            this.registerAtServer(destination,userId)
+        })
+        this.setState({destinationsList: destinationsList})
     }
-    
-    removeDestination = (destinationId)=>{
+
+    removeDestination = (destinationId, userId)=>{
         var newDestinations = this.state.destinationsList.filter((destination)=>{if(destination.id !== destinationId){
             return true;
         }})
+        this.removeRegisterAtServer(destinationId, userId);
         this.setState({destinationsList:newDestinations})
     }
+
     createSingleWaitingDestination(destinationData){
+        var {userId} = this.props.navigation.state.params;
         return <SingleWaitingDestination destinationData={destinationData}
-                                         removeDestination={this.removeDestination}/>
+                                         removeDestination={this.removeDestination}
+                                         userId={userId}/>
+    }
+
+    registerAtServer(destination,userId){
+        var url = 'http://weride.azurewebsites.net/api/queues/Queue?userId='+userId+'&destinationId='+destination.id;
+        fetch(url, {
+            method: 'POST'
+        })
+            .then((response) => {return response})
+            .catch((err) => {
+                console.log(err);
+            });
+    }
+
+    removeRegisterAtServer(destinationId,userId){
+        var url = 'http://weride.azurewebsites.net/api/queues/Unsubscribe?userId='+userId+'&destinationId='+destinationId;
+        fetch(url, {
+            method: 'DELETE'
+        })
+            .then((response) => {return response})
+            .catch((err) => {
+                console.log(err);
+            });
+
     }
 
     render() {
@@ -37,7 +68,6 @@ export default class WaitingScreen extends Component {
                 dataSource={dataSource}
                 renderRow={(destinationData) => this.createSingleWaitingDestination(destinationData)}
             />
-
         );
     }
 }

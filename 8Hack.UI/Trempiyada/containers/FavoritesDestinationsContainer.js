@@ -3,6 +3,8 @@ import { Container, Content, Button } from 'native-base';
 import {View, ListView, StyleSheet, ScrollView} from 'react-native'
 import {Text, ListItem, Fab, Icon} from 'native-base'
 import FavoriteDestination from '../components/FavoriteDestination'
+import { NavigationActions } from 'react-navigation'
+
 
 export default class FavoritesDestinationsContainer extends Component {
     constructor(props){
@@ -39,18 +41,24 @@ export default class FavoritesDestinationsContainer extends Component {
             favorites: newFavorties,
             dataSource: ds.cloneWithRows(newFavorties)
         })
+        
+
+
     }
 
     startRide = (checkedData) => {
-        console.log('got here')
         var {navigate} = this.props.navigation;
-        navigate('WaitingScreen', {destinationsList:checkedData});
+        var {userId} = this.props;
+        navigate('WaitingScreen', {destinationsList:checkedData,
+                                    userId:userId});
     }
 
     createSingleDestination(destinationData, navigation){
+        var {userId} = this.props;
         return (
             <FavoriteDestination destinationData = {destinationData}
-                                 navigation={navigation}/>
+                                 navigation={navigation}
+                                userId={userId}/>
         )
     }
 
@@ -59,7 +67,7 @@ export default class FavoritesDestinationsContainer extends Component {
         return (
             <View>
                 <View>
-                    <Text> אני רוצה לנסוע ל</Text>
+                    <Text> לאן תרצה לנסוע?</Text>
                     <ListView
                         enableEmptySections={true}
                         dataSource={this.state.dataSource}
