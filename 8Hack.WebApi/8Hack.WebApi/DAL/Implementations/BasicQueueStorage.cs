@@ -16,6 +16,17 @@ namespace _8Hack.WebApi.DAL.Implementations
         public BasicQueueStorage()
         {
             _queues = new List<DestinationQueue>();
+
+            var marco = new UserDetails(){Id = "1234",Name = "מרקו"};
+            var telAviv = new DestinationQueue(new Destination() {Id = "1", Name = "רכבת תל אביב האוניברסיטה"});
+            var dan = new DestinationQueue(new Destination() {Id = "7", Name = "דן"});
+            var eilat = new DestinationQueue(new Destination() {Id = "6", Name = "אילת"});
+            telAviv.Subscribers.Add(marco);
+            dan.Subscribers.Add(marco);
+            eilat.Subscribers.Add(marco);
+            _queues.Add(telAviv);
+            _queues.Add(dan);
+            _queues.Add(eilat);
         }
 
 
