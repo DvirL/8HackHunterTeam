@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { StyleSheet, Button, View } from 'react-native';
+import { StyleSheet, View, Text } from 'react-native';
+import { Button } from 'native-base';
 
 export default class PopularDestination extends Component {
     constructor(props){
@@ -9,12 +10,11 @@ export default class PopularDestination extends Component {
     render() {
         const {destination, nav} = this.props;
 
-        console.log(destination);
-
         return (
             <View style={styles.item}>
-                <Button style={styles.buttons} onPress={()=>this.navigateToDestinationQueue(nav,destination)}
-                        title={ destination.name } />
+                    <Button style={baseStyles.buttons} full onPress={()=>this.navigateToDestinationQueue(nav,destination)}>
+                        <Text style={styles.text}>{ destination.name }</Text>
+                    </Button>
             </View>
         );
     }
@@ -27,7 +27,13 @@ const styles = StyleSheet.create({
     item: {
         padding: 6
     },
-    buttons : {
-        height: 70
+    text : {
+        color: '#FFFFFF'
     }
 });
+
+const baseStyles = {
+    buttons:{
+        borderRadius: 6
+    }
+};
