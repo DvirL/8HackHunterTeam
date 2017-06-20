@@ -22,9 +22,6 @@ namespace _8Hack.WebApi.DAL.Implementations
             _destinations.Add(new Destination() { Id = "5", Name = "באר שבע" });
             _destinations.Add(new Destination() { Id = "6", Name = "רכבת סבידור מרכז" });
             _destinations.Add(new Destination() { Id = "7", Name = "ראשון לציון - מזרח" });
-            _destinations.Add(new Destination() { Id = "8", Name = "ראשון לציון - מערב" });
-            _destinations.Add(new Destination() { Id = "9", Name = "אילת" });
-            _destinations.Add(new Destination() { Id = "10", Name = "דן" });
         }
 
         public IEnumerable<Destination> Destinations
