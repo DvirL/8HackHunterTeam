@@ -14,12 +14,12 @@ export default class WaitingQueueItem extends Component {
             {
                 text:'עלה',
                 backgroundColor:'#3cbc76',
-                onPress : () => {this.props.deleteFromQueue(this.props.item.id, 'Got On')}
+                onPress : () => {this.props.deleteFromQueue(this.props.item.key, 'Got On')}
             },
             {
                 text:'לא בא',
                 backgroundColor:'#d31f0e',
-                onPress : () => {this.props.deleteFromQueue(this.props.item.id, 'No Show')}
+                onPress : () => {this.props.deleteFromQueue(this.props.item.key, 'No Show')}
             }];
 
         const {item} = this.props;

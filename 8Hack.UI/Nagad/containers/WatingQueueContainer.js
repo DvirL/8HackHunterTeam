@@ -21,14 +21,16 @@ export default class WatingQueueContainer extends Component {
         getWaitingQueue(destinationId, (waitingList)=>
         {
             console.log('got from server : ' + waitingList);
+            waitingList = waitingList.map(w=> {return {key:w.id, name:w.name};});
+            thisSelf.setState({queue: waitingList});
         });
     }
 
-    deleteFromQueue = (userName, reason)=>{
-        console.log('removing ' + userName + ' because : ' + reason);
+    deleteFromQueue = (userId, reason)=>{
+        console.log('removing ' + userId + ' because : ' + reason);
         var newQueue = this.state.queue;
         newQueue = newQueue.filter((x)=>{
-            return x.name != userName;
+            return x.key != userId;
         });
         this.setState({queue: newQueue});
     }
@@ -38,7 +40,7 @@ export default class WatingQueueContainer extends Component {
             <View>
                 <FlatList
                     data={this.state.queue}
-                    renderItem={({item}) => <WaitingQueueItem name={item} deleteFromQueue={this.deleteFromQueue}/>}
+                    renderItem={({item}) => <WaitingQueueItem item={item} deleteFromQueue={this.deleteFromQueue}/>}
             />
             </View>
         );
