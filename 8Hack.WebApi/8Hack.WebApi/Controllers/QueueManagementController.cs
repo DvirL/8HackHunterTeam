@@ -47,7 +47,7 @@ namespace _8Hack.WebApi.Controllers
 
         [HttpGet]
         [Route("FullQueue")]
-        public IEnumerable<UserDetails> GetQueue(string destinationId, string userId)
+        public IEnumerable<UserDetails> GetQueue(string destinationId)
         {
             // Get destination queue according to destinationId
             var requestedDestination = _destinationsStorage.GetDestination(destinationId);
