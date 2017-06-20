@@ -14,20 +14,20 @@ export default class WaitingQueueItem extends Component {
             {
                 text:'עלה',
                 backgroundColor:'#3cbc76',
-                onPress : () => {this.props.deleteFromQueue(this.props.name, 'Got On')}
+                onPress : () => {this.props.deleteFromQueue(this.props.item.key, 'Got On')}
             },
             {
                 text:'לא בא',
                 backgroundColor:'#d31f0e',
-                onPress : () => {this.props.deleteFromQueue(this.props.name, 'No Show')}
+                onPress : () => {this.props.deleteFromQueue(this.props.item.key, 'No Show')}
             }];
 
-        const {name} = this.props;
+        const {item} = this.props;
         return (
             <View style={styles.viewContainer}>
                 <Swipeout style={styles.container} right={swipeOptions} close={this.state.active}>
                     <View>
-                        <Text style={styles.buttons}>{name}</Text>
+                        <Text style={styles.buttons}>{item.name}</Text>
                     </View>
                 </Swipeout>
             </View>
